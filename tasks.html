@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tasks — SemanticQA</title>
+<meta name="description" content="Twelve standalone tasks plus six sequential compositions, with worked examples taken directly from the paper.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site2.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='10' fill='%2380b1ef'/></svg>">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="./">SemanticQA</a>
+    <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="primary-nav">
+      <a href="./">Overview</a>
+      <a href="tasks.html">Tasks</a>
+      <a href="results.html">Results</a>
+      <a href="https://huggingface.co/datasets/jacklanda/SemanticQA">Data</a>
+      <a href="https://github.com/jacklanda/SemanticQA">Code</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero container reveal">
+  <span class="eyebrow">The benchmark suite</span>
+  <h1>Twelve tasks, four phrase types, one shared frame</h1>
+  <p class="lede">
+    Every task lives at the intersection of a <strong>phrase category</strong>
+    (idiom, collocation, noun compound, verbal MWE) and a <strong>semantic operation</strong>
+    (detection, extraction, categorization, interpretation). Below: the canonical
+    examples used in the paper, the prompt skeleton, and what each metric actually rewards.
+  </p>
+
+  <div class="chips" data-chips>
+    <button class="chip active" data-filter="all">All</button>
+    <button class="chip" data-filter="idiom">Idioms</button>
+    <button class="chip" data-filter="coll">Collocations</button>
+    <button class="chip" data-filter="nc">Noun compounds</button>
+    <button class="chip" data-filter="vmwe">Verbal MWEs</button>
+    <button class="chip" data-filter="seq">Sequential</button>
+  </div>
+</section>
+
+<!-- =============== IDIOMS ====================================== -->
+<section class="container" id="idioms">
+  <div class="section-head"><h2>Idiomatic expressions</h2><a class="anchor" href="#idioms">#idioms</a></div>
+
+  <div class="grid grid-3 reveal-stagger">
+    <article class="card" data-task="idiom" id="ied">
+      <span class="badge">IED · Detection</span>
+      <h3>Idiomatic Expression Detection</h3>
+      <p>Given context, choose the correct figurative reading from a 4-option MCQ. Tests whether the model recognises that a literal reading is wrong.</p>
+      <div class="example">
+        <span class="ex-label">Example · context</span>
+        <div class="ex-context">"The fans waited for hours, hoping to <span class="ex-target">catch a glimpse of</span> the celebrity by the stage door."</div>
+        <span class="ex-label">Choices</span>
+        <div class="ex-row correct"><span class="k">✓</span><span class="v">briefly see</span></div>
+        <div class="ex-row wrong"><span class="k">×</span><span class="v">grab and hold</span></div>
+        <div class="ex-row wrong"><span class="k">×</span><span class="v">throw away</span></div>
+        <div class="ex-row wrong"><span class="k">×</span><span class="v">put together</span></div>
+      </div>
+      <p class="note">Metric — MCQ Accuracy &nbsp;·&nbsp; Source — MAGPIE / EPIE</p>
+    </article>
+
+    <article class="card" data-task="idiom" id="iee">
+      <span class="badge">IEE · Extraction</span>
+      <h3>Idiomatic Expression Extraction</h3>
+      <p>Spot the idiom <em>span</em> in a sentence that may or may not contain one. Open-ended — no choice list.</p>
+      <div class="example">
+        <span class="ex-label">Sentence</span>
+        <div class="ex-context">"Honestly, fixing this build feels like <span class="ex-target">beating a dead horse</span> at this point."</div>
+        <div class="ex-row correct"><span class="k">→</span><span class="v">beating a dead horse</span></div>
+      </div>
+      <p class="note">Metric — Exact Match (span)</p>
+    </article>
+
+    <article class="card" data-task="idiom" id="iei">
+      <span class="badge">IEI · Interpretation</span>
+      <h3>Idiomatic Expression Interpretation</h3>
+      <p>Generate a paraphrase of the idiom that fits the surrounding context — the hardest of the three.</p>
+      <div class="example">
+        <span class="ex-label">Sentence</span>
+        <div class="ex-context">"The merger came at <span class="ex-target">the time of significant change</span>: business positively turbulent."</div>
+        <div class="ex-row correct"><span class="k">→</span><span class="v">"a period of major upheaval and transition"</span></div>
+      </div>
+      <p class="note">Metric — ROUGE-L · BERTScore-F1 · METEOR · BLEU</p>
+    </article>
+  </div>
+</section>
+
+<!-- =============== COLLOCATIONS =============================== -->
+<section class="band">
+<div class="container" id="collocations">
+  <div class="section-head"><h2>Lexical collocations</h2><a class="anchor" href="#collocations">#collocations</a></div>
+
+  <div class="grid grid-3 reveal-stagger">
+    <article class="card" data-task="coll" id="lcc">
+      <span class="badge">LCC · Categorization</span>
+      <h3>Lexical Collocation Categorization</h3>
+      <p>Tag the collocation with one of the LEXFUNC semantic roles — for which we evaluate at 1, 2, 4, 8 and 16-category granularities.</p>
+      <div class="example">
+        <span class="ex-label">Collocation</span>
+        <div class="ex-context"><span class="ex-target">brute power</span> blacking out the homes of 5,000 residents.</div>
+        <div class="ex-row correct"><span class="k">→</span><span class="v">Magn (intensifier)</span></div>
+      </div>
+      <p class="note">Metric — Accuracy · Macro / Micro / Weighted F1 &nbsp;·&nbsp; Taxonomies — 1 / 2 / 4 / 8 / 16</p>
+    </article>
+
+    <article class="card" data-task="coll" id="lce">
+      <span class="badge">LCE · Extraction</span>
+      <h3>Lexical Collocation Extraction</h3>
+      <p>Identify the collocation span in running text. Used downstream as the first step of sequential tasks.</p>
+      <div class="example">
+        <span class="ex-label">Sentence</span>
+        <div class="ex-context">"The sky <span class="ex-target">filled up</span> the moment the alarm clock went off."</div>
+        <div class="ex-row correct"><span class="k">→</span><span class="v">filled up</span></div>
+      </div>
+      <p class="note">Metric — Exact Match</p>
+    </article>
+
+    <article class="card" data-task="coll" id="lci">
+      <span class="badge">LCI · Interpretation</span>
+      <h3>Lexical Collocation Interpretation</h3>
+      <p>Paraphrase the collocation in context — converting a lexical preference into a transparent gloss.</p>
+      <div class="example">
+        <span class="ex-label">Sentence</span>
+        <div class="ex-context">"The president continued Friday to <span class="ex-target">call into</span> his sons' Boston accusation."</div>
+        <div class="ex-row correct"><span class="k">→</span><span class="v">"cast doubt on the validity of"</span></div>
+      </div>
+      <p class="note">Metric — ROUGE-L · BERTScore-F1 · METEOR · BLEU</p>
+    </article>
+
+    <article class="card" data-task="coll" id="cr">
+      <span class="badge">CR · Retrieval</span>
+      <h3>Collocate Retrieval</h3>
+      <p>Given a base word and a desired semantic function, retrieve the appropriate collocate. Probes lexical preference directly.</p>
+      <div class="example">
+        <span class="ex-label">Prompt</span>
+        <div class="ex-context">Base: <strong>alarm</strong> · Function: <em>cause-to-be (Caus)</em></div>
+        <div class="ex-row correct"><span class="k">→</span><span class="v">"raise"</span></div>
+      </div>
+      <p class="note">Metric — Exact Match</p>
+    </article>
+
+    <article class="card" data-task="coll" id="ci">
+      <span class="badge">CI · Identification</span>
+      <h3>Collocation Identification</h3>
+      <p>Binary check on a candidate pair — is it a conventionalised collocation, or just two co-occurring words?</p>
+      <div class="example">
+        <span class="ex-label">Pair</span>
+        <div class="ex-context">heavy rain ↔ ?</div>
+        <div class="ex-row correct"><span class="k">✓</span><span class="v">collocation</span></div>
+      </div>
+      <p class="note">Metric — Accuracy</p>
+    </article>
+  </div>
+</div>
+</section>
+
+<!-- =============== NOUN COMPOUNDS ============================== -->
+<section class="container" id="ncs">
+  <div class="section-head"><h2>Noun compounds</h2><a class="anchor" href="#ncs">#ncs</a></div>
+
+  <div class="grid grid-3 reveal-stagger">
+    <article class="card" data-task="nc" id="ncc">
+      <span class="badge">NCC · Compositionality</span>
+      <h3>Noun Compound Compositionality</h3>
+      <p>Decide whether the compound is fully compositional, partly so, or non-compositional.</p>
+      <div class="example">
+        <span class="ex-label">Compound</span>
+        <div class="ex-context">"<span class="ex-target">fair play</span>" incorporates the concept of fairness, respect for others, and adherence to the rules.</div>
+        <div class="ex-row wrong"><span class="k">×</span><span class="v">A · Compositional</span></div>
+        <div class="ex-row correct"><span class="k">✓</span><span class="v">B · Partly compositional</span></div>
+        <div class="ex-row wrong"><span class="k">×</span><span class="v">C · None of the above</span></div>
+        <div class="ex-row wrong"><span class="k">×</span><span class="v">D · Non-compositional</span></div>
+      </div>
+      <p class="note">Metric — MCQ Accuracy &nbsp;·&nbsp; Source — NCTTI</p>
+    </article>
+
+    <article class="card" data-task="nc" id="nce">
+      <span class="badge">NCE · Extraction</span>
+      <h3>Noun Compound Extraction</h3>
+      <p>Pick out the [N1 N2] span in a sentence — the compound boundary problem in the wild.</p>
+      <div class="example">
+        <span class="ex-label">Sentence</span>
+        <div class="ex-context">"The timeless shape of the perfect <span class="ex-target">Paris fashion</span> belies its 13th-century roots in Rouen."</div>
+        <div class="ex-row correct"><span class="k">→</span><span class="v">Paris fashion</span></div>
+      </div>
+      <p class="note">Metric — Exact Match</p>
+    </article>
+
+    <article class="card" data-task="nc" id="nci">
+      <span class="badge">NCI · Interpretation</span>
+      <h3>Noun Compound Interpretation</h3>
+      <p>Produce a free-form paraphrase that preserves the modifier-head relation.</p>
+      <div class="example">
+        <span class="ex-label">Compound</span>
+        <div class="ex-context">"She used a <span class="ex-target">straightedge</span> to draw a ruler line across the paper, ensuring her print was perfectly aligned."</div>
+        <div class="ex-row correct"><span class="k">→</span><span class="v">"ruler bar"</span></div>
+      </div>
+      <p class="note">Metric — ROUGE-L · BERTScore-F1 · METEOR · BLEU</p>
+    </article>
+  </div>
+</section>
+
+<!-- =============== VERBAL MWE ================================== -->
+<section class="band">
+<div class="container" id="vmwe">
+  <div class="section-head"><h2>Verbal multi-word expressions</h2><a class="anchor" href="#vmwe">#vmwe</a></div>
+
+  <div class="grid grid-3 reveal-stagger">
+    <article class="card" data-task="vmwe" id="vmwex">
+      <span class="badge">VMWE · Extraction</span>
+      <h3>Verbal MWE Extraction</h3>
+      <p>Drawn from PARSEME 1.1. Identifies six verbal-MWE subclasses (LVCs, IRVs, VIDs, …) — the only task with deeper internal sub-structure.</p>
+      <div class="example">
+        <span class="ex-label">Sentence</span>
+        <div class="ex-context">"Harry <span class="ex-target">licked his</span> arm as the landlady <span class="ex-target">filled clobber</span>."</div>
+        <div class="ex-row correct"><span class="k">→</span><span class="v">"licked on" · "rilled bar"</span></div>
+      </div>
+      <p class="note">Metric — Exact Match &nbsp;·&nbsp; Source — PARSEME 1.1 (English)</p>
+    </article>
+  </div>
+</div>
+</section>
+
+<!-- =============== SEQUENTIAL =================================== -->
+<section class="container" id="sequential">
+  <div class="section-head"><h2>Sequential compositions</h2><a class="anchor" href="#sequential">#sequential</a></div>
+  <p class="lede">
+    Six tasks chain extraction with a downstream operation. The model must extract a phrase
+    <em>and</em> categorize / interpret it in a single response — a setting that surfaces
+    cascade failure invisible to single-step evaluation.
+  </p>
+
+  <div class="grid grid-3 reveal-stagger">
+    <article class="card" data-task="seq">
+      <span class="badge">Idiom Ext. + Judgment</span>
+      <h3>IEE → IED</h3>
+      <p>Extract an idiom from a sentence, then classify whether the use is figurative.</p>
+    </article>
+    <article class="card" data-task="seq">
+      <span class="badge">Idiom Ext. + Interpretation</span>
+      <h3>IEE → IEI</h3>
+      <p>Extract the idiom, then produce a context-faithful paraphrase. Errors in step 1 propagate.</p>
+    </article>
+    <article class="card" data-task="seq">
+      <span class="badge">Coll. Ext. + Judgment</span>
+      <h3>LCE → CI</h3>
+      <p>Extract the collocate pair, then judge whether it is a true collocation.</p>
+    </article>
+    <article class="card" data-task="seq">
+      <span class="badge">Coll. Ext. + Interpretation</span>
+      <h3>LCE → LCI</h3>
+      <p>Extract the collocation, then gloss it. The most cascade-sensitive of the six.</p>
+    </article>
+    <article class="card" data-task="seq">
+      <span class="badge">NC Ext. + Compositionality</span>
+      <h3>NCE → NCC</h3>
+      <p>Extract the compound, then judge its compositionality grade.</p>
+    </article>
+    <article class="card" data-task="seq">
+      <span class="badge">NC Ext. + Interpretation</span>
+      <h3>NCE → NCI</h3>
+      <p>Extract the compound, then paraphrase its modifier-head relation.</p>
+    </article>
+  </div>
+</section>
+
+<!-- =============== PROMPT TEMPLATE ============================ -->
+<section class="prose">
+  <div class="section-head"><h2>Prompt skeleton</h2><a class="anchor" href="https://github.com/jacklanda/SemanticQA/tree/main/semantic_qa/prompts">all prompts →</a></div>
+  <p>
+    Prompts are deliberately minimal: a one-line task statement, an optional handful of
+    examples, then the input. The intent is to <em>vary the task, not the prompt</em>.
+  </p>
+  <pre><code>Task:    {task description}
+Input:   {phrase + context}
+Output:  {expected form}
+
+— example 1 —
+Input:   "She tried to <em>break the ice</em> at the meeting."
+Output:  "make people feel less awkward"</code></pre>
+  <p class="note">All prompts (zero-shot and few-shot variants for every task) ship with the codebase.</p>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container row">
+    <div>© 2026 The SemanticQA authors · MIT License</div>
+    <div>
+      <a href="./">Overview</a> ·
+      <a href="results.html">Results</a> ·
+      <a href="https://github.com/jacklanda/SemanticQA">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js"></script>
+</body>
+</html>
