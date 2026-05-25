@@ -379,7 +379,7 @@ section#cite ~ .site-footer { margin-top: 1.5rem; }
 
 /* iPhone 13 Pro → 17 Pro: narrow the hero title only */
 @media (min-width: 390px) and (max-width: 412px) {
-  .hero h1 { max-width: 11ch; }
+  .hero h1 { max-width: 15ch; }
 }
 .hero::before, .hero::after { display: none; }
 .hero .meta {
