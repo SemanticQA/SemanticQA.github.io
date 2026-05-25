@@ -288,13 +288,13 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; font-fea
 /* ----- taxonomy radial figure ----------------------------------- */
 .taxonomy-figure {
   display: flex; flex-direction: column; align-items: center;
-  margin: 3.5rem 0 2.5rem;
+  margin: 4.5rem 0 3.25rem;
+  padding: 0 1rem;
 }
 .taxonomy-figure svg {
-  max-width: 600px;
+  max-width: 720px;
   width: 100%;
   height: auto;
-  aspect-ratio: 1 / 1;
   filter: drop-shadow(0 8px 24px rgba(30, 60, 110, .08));
   transition: transform .6s var(--ease-out);
 }
@@ -305,12 +305,12 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; font-fea
 }
 .taxonomy-figure figcaption {
   font-family: var(--anthropicSans);
-  font-size: .85rem;
+  font-size: .92rem;
   color: var(--muted);
   text-align: center;
-  margin-top: 1.4rem;
-  max-width: 56ch;
-  line-height: 1.65;
+  margin-top: 2rem;
+  max-width: 60ch;
+  line-height: 1.7;
 }
 
 /* ----- chart figure (line/bar SVGs) ----------------------------- */

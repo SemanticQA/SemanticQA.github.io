@@ -291,30 +291,30 @@ section#cite ~ .site-footer { margin-top: 1.5rem; }
 /* hamburger (hidden on desktop) */
 .nav-toggle {
   display: none;
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   padding: 0;
   background: transparent;
   border: 1px solid var(--rule);
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
   position: relative;
   transition: border-color .2s, background .2s;
 }
 .nav-toggle span {
   position: absolute;
-  left: 6px; right: 6px;
+  left: 5px; right: 5px;
   height: 1.25px;
   background: var(--ink-2);
   border-radius: 2px;
   transition: transform .25s var(--ease-out), opacity .2s, top .25s var(--ease-out);
 }
-.nav-toggle span:nth-child(1) { top: 8px; }
-.nav-toggle span:nth-child(2) { top: 12px; }
-.nav-toggle span:nth-child(3) { top: 16px; }
-.nav-toggle[aria-expanded="true"] span:nth-child(1) { top: 12px; transform: rotate(45deg); }
+.nav-toggle span:nth-child(1) { top: 6px; }
+.nav-toggle span:nth-child(2) { top: 10px; }
+.nav-toggle span:nth-child(3) { top: 14px; }
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { top: 10px; transform: rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-.nav-toggle[aria-expanded="true"] span:nth-child(3) { top: 12px; transform: rotate(-45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { top: 10px; transform: rotate(-45deg); }
 
 @media (max-width: 760px) {
   .nav-toggle { display: block; }
