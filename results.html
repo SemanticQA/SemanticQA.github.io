@@ -16,7 +16,14 @@
 
 <header class="site-header">
   <div class="container bar">
-    <a class="brand" href="./">SemanticQA</a>
+    <div class="brand-wrap">
+      <a class="brand" href="./">
+        <img class="brand-logo" src="assets/img/acl_logo.png" alt="ACL 2026">
+        <span>SemanticQA</span>
+      </a>
+      <span class="brand-sep" aria-hidden="true">|</span>
+      <span class="brand-acl">ACL 2026 Oral</span>
+    </div>
     <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation">
       <span></span><span></span><span></span>
     </button>
@@ -25,7 +32,7 @@
       <a href="tasks.html">Tasks</a>
       <a href="results.html">Results</a>
       <a href="https://huggingface.co/datasets/jacklanda/SemanticQA">Data</a>
-      <a href="https://github.com/jacklanda/SemanticQA">Code</a>
+      <a href="https://github.com/jacklanda/SemanticQA">Evals</a>
     </nav>
   </div>
 </header>
@@ -34,7 +41,7 @@
 
 <section class="hero container reveal">
   <span class="eyebrow">Empirical findings</span>
-  <h1>What 31 models tell us about phrasal semantics</h1>
+  <h1>What 30 models tell us about phrasal semantics</h1>
   <p class="lede">
     Headlines first, then five readouts: where models lead, where they collapse, and
     where in-context learning helps versus hurts. All numbers below are taken from the
@@ -106,12 +113,12 @@
     right MCQ for an idiom often cannot paraphrase it.</p>
 
   <div class="mini-bar reveal">
-    <div class="row"><span class="label">IED · MCQ accuracy</span>     <span class="track"><span class="fill" data-w="82%"></span></span><span class="val">82.8</span></div>
-    <div class="row"><span class="label">IEI · ROUGE-L</span>           <span class="track"><span class="fill" data-w="35%"></span></span><span class="val">35.6</span></div>
-    <div class="row"><span class="label">NCC · MCQ accuracy</span>     <span class="track"><span class="fill" data-w="71%"></span></span><span class="val">71.0</span></div>
-    <div class="row"><span class="label">NCI · ROUGE-L</span>           <span class="track"><span class="fill" data-w="28%"></span></span><span class="val">28.4</span></div>
-    <div class="row"><span class="label">CI · pair accuracy</span>      <span class="track"><span class="fill" data-w="74%"></span></span><span class="val">74.2</span></div>
-    <div class="row"><span class="label">LCI · ROUGE-L</span>           <span class="track"><span class="fill" data-w="30%"></span></span><span class="val">30.4</span></div>
+    <div class="row fv-1"><span class="label">IED · MCQ accuracy</span>     <span class="track"><span class="fill" data-w="82%"></span></span><span class="val">82.8</span></div>
+    <div class="row fv-5"><span class="label">IEI · ROUGE-L</span>           <span class="track"><span class="fill" data-w="35%"></span></span><span class="val">35.6</span></div>
+    <div class="row fv-2"><span class="label">NCC · MCQ accuracy</span>     <span class="track"><span class="fill" data-w="71%"></span></span><span class="val">71.0</span></div>
+    <div class="row fv-6"><span class="label">NCI · ROUGE-L</span>           <span class="track"><span class="fill" data-w="28%"></span></span><span class="val">28.4</span></div>
+    <div class="row fv-3"><span class="label">CI · pair accuracy</span>      <span class="track"><span class="fill" data-w="74%"></span></span><span class="val">74.2</span></div>
+    <div class="row fv-4"><span class="label">LCI · ROUGE-L</span>           <span class="track"><span class="fill" data-w="30%"></span></span><span class="val">30.4</span></div>
   </div>
 
   <div class="callout">
@@ -128,7 +135,7 @@
 <div class="container" id="finding-2">
   <div class="section-head"><h2>02 · LCC accuracy collapses with category granularity</h2><a class="anchor" href="#finding-2">#02</a></div>
   <p class="lede">
-    The clearest scaling effect in SemanticQA. As the LEXFUNC taxonomy grows from
+    The clearest scaling effect in SemanticQA. As the lexical function taxonomy grows from
     binary to 16 classes, every model's accuracy drops monotonically — even closed
     frontier models lose more than 35 percentage points.
   </p>
@@ -220,7 +227,7 @@
       </g>
     </svg>
     <figcaption class="note" style="text-align:center;margin-top:.6rem">
-      Accuracy on LCC as the LEXFUNC label set is widened from 2 to 16 classes (zero-shot).
+      Accuracy on LCC as the lexical function label set is widened from 2 to 16 classes (zero-shot).
       The gradient is steepest in the 4 → 8 transition.
     </figcaption>
   </figure>
@@ -248,23 +255,23 @@
     <div class="card">
       <h3>Generative tasks · ICL helps</h3>
       <div class="mini-bar">
-        <div class="row"><span class="label">IEI · 0-shot</span>  <span class="track"><span class="fill" data-w="30%"></span></span><span class="val">30.4</span></div>
-        <div class="row"><span class="label">IEI · 5-shot</span>  <span class="track"><span class="fill" data-w="35.6%"></span></span><span class="val">35.6</span></div>
-        <div class="row"><span class="label">NCI · 0-shot</span>  <span class="track"><span class="fill" data-w="24%"></span></span><span class="val">24.2</span></div>
-        <div class="row"><span class="label">NCI · 5-shot</span>  <span class="track"><span class="fill" data-w="28.4%"></span></span><span class="val">28.4</span></div>
-        <div class="row"><span class="label">LCI · 0-shot</span>  <span class="track"><span class="fill" data-w="26%"></span></span><span class="val">25.7</span></div>
-        <div class="row"><span class="label">LCI · 5-shot</span>  <span class="track"><span class="fill" data-w="30.4%"></span></span><span class="val">30.4</span></div>
+        <div class="row fv-5"><span class="label">IEI · 0-shot</span>  <span class="track"><span class="fill" data-w="30%"></span></span><span class="val">30.4</span></div>
+        <div class="row fv-2"><span class="label">IEI · 5-shot</span>  <span class="track"><span class="fill" data-w="35.6%"></span></span><span class="val">35.6</span></div>
+        <div class="row fv-6"><span class="label">NCI · 0-shot</span>  <span class="track"><span class="fill" data-w="24%"></span></span><span class="val">24.2</span></div>
+        <div class="row fv-3"><span class="label">NCI · 5-shot</span>  <span class="track"><span class="fill" data-w="28.4%"></span></span><span class="val">28.4</span></div>
+        <div class="row fv-5"><span class="label">LCI · 0-shot</span>  <span class="track"><span class="fill" data-w="26%"></span></span><span class="val">25.7</span></div>
+        <div class="row fv-2"><span class="label">LCI · 5-shot</span>  <span class="track"><span class="fill" data-w="30.4%"></span></span><span class="val">30.4</span></div>
       </div>
     </div>
     <div class="card">
       <h3>Judgment tasks · ICL hurts</h3>
       <div class="mini-bar">
-        <div class="row"><span class="label">IED · 0-shot</span>  <span class="track"><span class="fill" data-w="82.8%"></span></span><span class="val">82.8</span></div>
-        <div class="row"><span class="label">IED · 5-shot</span>  <span class="track"><span class="fill" data-w="78.4%"></span></span><span class="val">78.4</span></div>
-        <div class="row"><span class="label">NCC · 0-shot</span>  <span class="track"><span class="fill" data-w="71.0%"></span></span><span class="val">71.0</span></div>
-        <div class="row"><span class="label">NCC · 5-shot</span>  <span class="track"><span class="fill" data-w="66.5%"></span></span><span class="val">66.5</span></div>
-        <div class="row"><span class="label">CI · 0-shot</span>  <span class="track"><span class="fill" data-w="74.2%"></span></span><span class="val">74.2</span></div>
-        <div class="row"><span class="label">CI · 5-shot</span>  <span class="track"><span class="fill" data-w="70.1%"></span></span><span class="val">70.1</span></div>
+        <div class="row fv-1"><span class="label">IED · 0-shot</span>  <span class="track"><span class="fill" data-w="82.8%"></span></span><span class="val">82.8</span></div>
+        <div class="row fv-3"><span class="label">IED · 5-shot</span>  <span class="track"><span class="fill" data-w="78.4%"></span></span><span class="val">78.4</span></div>
+        <div class="row fv-2"><span class="label">NCC · 0-shot</span>  <span class="track"><span class="fill" data-w="71.0%"></span></span><span class="val">71.0</span></div>
+        <div class="row fv-4"><span class="label">NCC · 5-shot</span>  <span class="track"><span class="fill" data-w="66.5%"></span></span><span class="val">66.5</span></div>
+        <div class="row fv-2"><span class="label">CI · 0-shot</span>  <span class="track"><span class="fill" data-w="74.2%"></span></span><span class="val">74.2</span></div>
+        <div class="row fv-4"><span class="label">CI · 5-shot</span>  <span class="track"><span class="fill" data-w="70.1%"></span></span><span class="val">70.1</span></div>
       </div>
     </div>
   </div>

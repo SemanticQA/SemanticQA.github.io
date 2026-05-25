@@ -16,7 +16,14 @@
 
 <header class="site-header">
   <div class="container bar">
-    <a class="brand" href="./">SemanticQA</a>
+    <div class="brand-wrap">
+      <a class="brand" href="./">
+        <img class="brand-logo" src="assets/img/acl_logo.png" alt="ACL 2026">
+        <span>SemanticQA</span>
+      </a>
+      <span class="brand-sep" aria-hidden="true">|</span>
+      <span class="brand-acl">ACL 2026 Oral</span>
+    </div>
     <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation">
       <span></span><span></span><span></span>
     </button>
@@ -25,7 +32,7 @@
       <a href="tasks.html">Tasks</a>
       <a href="results.html">Results</a>
       <a href="https://huggingface.co/datasets/jacklanda/SemanticQA">Data</a>
-      <a href="https://github.com/jacklanda/SemanticQA">Code</a>
+      <a href="https://github.com/jacklanda/SemanticQA">Evals</a>
     </nav>
   </div>
 </header>
@@ -108,7 +115,7 @@
     <article class="card" data-task="coll" id="lcc">
       <span class="badge">LCC · Categorization</span>
       <h3>Lexical Collocation Categorization</h3>
-      <p>Tag the collocation with one of the LEXFUNC semantic roles — for which we evaluate at 1, 2, 4, 8 and 16-category granularities.</p>
+      <p>Tag the collocation with one of the lexical function semantic roles — for which we evaluate at 1, 2, 4, 8 and 16-category granularities.</p>
       <div class="example">
         <span class="ex-label">Collocation</span>
         <div class="ex-context"><span class="ex-target">brute power</span> blacking out the homes of 5,000 residents.</div>

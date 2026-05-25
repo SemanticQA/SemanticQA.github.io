@@ -54,7 +54,10 @@
   // Mini-bar — paint final widths immediately
   document.querySelectorAll(".mini-bar .fill").forEach(fill => {
     const w = fill.getAttribute("data-w") || fill.style.width;
-    if (w) fill.style.width = w;
+    if (w) {
+      fill.style.setProperty("--w", w);
+      fill.style.width = w;
+    }
   });
 
   // Scrollspy for TOC (active state only, no animation)
